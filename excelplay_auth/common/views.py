@@ -5,6 +5,9 @@ from .models import User
 from .serializers import UserSerializer
 from .decorators import is_logged_in, set_cookies
 
+from django.middleware.csrf import get_token
+
+from django.views.decorators.csrf import csrf_exempt
 
 def get_all_users(request):
     ''' Get all users '''
@@ -14,7 +17,7 @@ def get_all_users(request):
         serializer = UserSerializer(users, many=True)
         return JsonResponse(serializer.data, safe=False)
 
-
+@csrf_exempt
 def sign_in(request):
     if request.method == "POST":
 
@@ -64,7 +67,7 @@ def sign_in(request):
 @set_cookies
 def set_token(request):
     if request.method == "GET":
-        return JsonResponse({'Success': True})
+        return JsonResponse({'Suceess': True})
     else:
         return JsonResponse({'Error': 'Invalid Request'}, status=405)
 
