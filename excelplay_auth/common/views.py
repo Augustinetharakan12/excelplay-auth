@@ -9,6 +9,8 @@ from django.middleware.csrf import get_token
 
 from django.views.decorators.csrf import csrf_exempt
 
+import requests
+
 def get_all_users(request):
     ''' Get all users '''
     
